@@ -15,7 +15,7 @@ class SignupEmployee(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        return redirect('homepage')
+        return redirect('loginEmployee')
 
 
 class SignupResident(CreateView):
@@ -26,7 +26,7 @@ class SignupResident(CreateView):
 
     def form_valid(self, form):
          user = form.save()
-         return redirect('homepage')
+         return redirect('loginResident')
 
 
 def login_Employeepage(request):
@@ -44,7 +44,7 @@ def login_Employeepage(request):
             return redirect('loginEmployee')
 
 
-def login_Residentpage(request):
+def login_Resident(request):
     if request.method == "GET":
         return render(request,'loginResident.html')
     elif request.method == "POST":
@@ -57,3 +57,11 @@ def login_Residentpage(request):
         else:
             print("wrong username or password")
             return redirect('loginResident')
+
+
+
+
+@login_required()
+def homepage(request):
+    return render(request,'homepage.html')
+
