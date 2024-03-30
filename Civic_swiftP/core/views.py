@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.models import User
 from .forms import *
 from django.shortcuts import render ,redirect
-from django.contrib.auth import authenticate , login
+from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 # Create your views here.
@@ -58,9 +58,11 @@ def login_Resident(request):
             print("wrong username or password")
             return redirect('loginResident')
 
+def logout_user(request):
+    logout(request)
+    return redirect('loginEmployee')
 
 
 
-@login_required()
 def homepage(request):
     return render(request,'homepage.html')
