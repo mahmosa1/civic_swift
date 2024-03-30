@@ -5,6 +5,7 @@ from django.shortcuts import render ,redirect
 from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.urls import reverse
 # Create your views here.
 
 
@@ -66,3 +67,23 @@ def logout_user(request):
 
 def homepage(request):
     return render(request,'homepage.html')
+
+def search(request):
+    query = request.GET.get('query', '').strip().lower()
+    if not query:
+        # No search query was entered
+        return HttpResponse("You did not search for anything.")
+
+    # Define a mapping of keywords to view names (URL names)
+    search_mappings = {
+
+    }
+
+
+    for keyword, view_name in search_mappings.items():
+        if query == keyword:
+
+            return redirect(reverse(view_name))
+
+
+    return HttpResponse(f"No results found for '{query}'.")
