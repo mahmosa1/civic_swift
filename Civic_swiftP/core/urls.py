@@ -10,5 +10,6 @@ urlpatterns = [
     path('loginResident/',login_Resident,name='loginResident'),
     path('',homepage,name='homepage'),
     path('search',views.search,name='search'),
-
+    path('EmployeeM/', EmployeeM, name='EmployeeM'),
+    path('ResidentM/', ResidentM, name='ResidentM')
 ]

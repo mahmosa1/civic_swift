@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
+from django.contrib.auth.models import Group
+from .decorators import *
+from .models import Employee, Resident
 # Create your views here.
 
 
@@ -16,7 +19,9 @@ class SignupEmployee(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        return redirect('loginEmployee')
+        Employee_group = Group.objects.get(name='Employee')
+        Employee_group.user_set.add(user)
+        return redirect('homepage')
 
 
 class SignupResident(CreateView):
@@ -27,7 +32,9 @@ class SignupResident(CreateView):
 
     def form_valid(self, form):
          user = form.save()
-         return redirect('loginResident')
+         Resident_group = Group.objects.get(name='Resident')
+         Resident_group.user_set.add(user)
+         return redirect('homepage')
 
 
 def login_Employeepage(request):
@@ -39,7 +46,7 @@ def login_Employeepage(request):
         user = authenticate(username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect('homepage')
+            return redirect('EmployeeM')
         else:
             print("wrong username or password")
             return redirect('loginEmployee')
@@ -54,7 +61,7 @@ def login_Resident(request):
         user = authenticate(username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect('homepage')
+            return redirect('ResidentM')
         else:
             print("wrong username or password")
             return redirect('loginResident')
@@ -67,6 +74,15 @@ def logout_user(request):
 
 def homepage(request):
     return render(request,'homepage.html')
+
+@login_required
+@Employee_limit
+def EmployeeM(request):
+    return render(request,'EmployeeM.html')
+@login_required
+@Resident_limit
+def ResidentM(request):
+    return render(request,'ResidentM.html')
 
 def search(request):
     query = request.GET.get('query', '').strip().lower()
