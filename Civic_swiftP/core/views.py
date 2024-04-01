@@ -68,7 +68,7 @@ def login_Resident(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('loginEmployee')
+    return redirect('homepage')
 
 
 
@@ -107,3 +107,12 @@ def search(request):
 
 def Volunteer(request):
     return render(request, 'Volunteer.html')
+
+def delete_user(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+        user.delete()
+        return redirect('homepage')
+    except User.DoesNotExist:
+        # Handle the case where the user doesn't exist
+        return redirect('homepage')
