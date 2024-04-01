@@ -79,6 +79,7 @@ def homepage(request):
 @Employee_limit
 def EmployeeM(request):
     return render(request,'EmployeeM.html')
+
 @login_required
 @Resident_limit
 def ResidentM(request):
@@ -103,3 +104,6 @@ def search(request):
 
 
     return HttpResponse(f"No results found for '{query}'.")
+
+def Volunteer(request):
+    return render(request, 'Volunteer.html')
