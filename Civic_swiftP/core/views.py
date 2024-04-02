@@ -120,3 +120,7 @@ def delete_user(request, user_id):
 @admin_limit
 def Admin(request):
     return render(request, 'Admin.html')
+
+@login_required
+def Volunteer(request):
+    return render(request, 'Volunteer.html')
