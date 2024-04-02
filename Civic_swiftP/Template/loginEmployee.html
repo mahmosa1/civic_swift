@@ -1,19 +1,164 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Employee</title>
+    <title>HomePage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            background-image: url('https://t4.ftcdn.net/jpg/00/91/32/87/360_F_91328725_zdst7zcQcytqXIAg8PfxAREVrPbaSenH.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #555; /* Custom navbar color */
+            width: 100%;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .nav-link {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            color: #ccc;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .search-form input[type="search"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #fff;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .search-form button {
+            background-color: #4cdac2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background-color: #36b8a4;
+            transform: translateY(-2px);
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        .login-container h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ffa07a;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-container {
+    background-color: #cccccc; /* Change to grey */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 50px; /* Adjust as needed */
+     }
+
+
+
+        .dropdown-item {
+            color: #666;
+        }
+
+        .dropdown-item:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
-<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; height: 100vh;">
-    <div style="background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%;">
-        <h1 style="text-align: center; color: #333; font-size: 24px; margin-bottom: 20px;">Login Employee</h1>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'homepage' %}">Civic Swift</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Sign up</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'signupresident' %}">Resident</a></li>
+                            <li><a class="dropdown-item" href="{% url 'signupEmployee' %}">Employee</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="login-container">
+        <h1>Login Employee</h1>
         <form method="POST" action="">
             {% csrf_token %}
-            <input type="text" placeholder="Enter your username" name="username" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
-            <input type="password" placeholder="Enter your password" name="password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
-            <input type="submit" value="Login" style="background-color: #4cdac2; color: #ffffff; padding: 12px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px;">
-
-
+            <input type="text" placeholder="Enter your username" name="username">
+            <input type="password" placeholder="Enter your password" name="password">
+            <input type="submit" value="Login">
+        </form>
     </div>
 </body>
 </html>

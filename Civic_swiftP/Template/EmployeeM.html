@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>HomePage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
@@ -12,11 +11,18 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-image: url('https://t4.ftcdn.net/jpg/00/91/32/87/360_F_91328725_zdst7zcQcytqXIAg8PfxAREVrPbaSenH.jpg');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
         }
 
         .navbar {
-            background-color: #007bff; /* Custom navbar color */
+            background-color: #555; /* Custom navbar color */
+            width: 100%;
         }
 
         .navbar-brand {
@@ -65,9 +71,61 @@
             background-color: #36b8a4;
             transform: translateY(-2px);
         }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        .login-container h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ffa07a;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-container {
+    background-color: #cccccc; /* Change to grey */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 50px; /* Adjust as needed */
+     }
+
+
+
+        .dropdown-item {
+            color: #666;
+        }
+
+        .dropdown-item:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -79,7 +137,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'EmployeeM' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log out</a>
@@ -92,5 +150,3 @@
             </div>
         </div>
     </nav>
-</body>
-</html>

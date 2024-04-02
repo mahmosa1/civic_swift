@@ -116,3 +116,7 @@ def delete_user(request, user_id):
     except User.DoesNotExist:
         # Handle the case where the user doesn't exist
         return redirect('homepage')
+
+@admin_limit
+def Admin(request):
+    return render(request, 'Admin.html')

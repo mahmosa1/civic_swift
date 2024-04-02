@@ -11,7 +11,8 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-image: url('https://t4.ftcdn.net/jpg/00/91/32/87/360_F_91328725_zdst7zcQcytqXIAg8PfxAREVrPbaSenH.jpg');
+            background-size: cover;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,7 +21,7 @@
         }
 
         .navbar {
-            background-color: #007bff; /* Custom navbar color */
+            background-color: #555; /* Custom navbar color */
             width: 100%;
         }
 
@@ -70,6 +71,59 @@
             background-color: #36b8a4;
             transform: translateY(-2px);
         }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 50px; /* Adjust as needed */
+        }
+
+        .login-container h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ffa07a;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-container {
+    background-color: #cccccc; /* Change to grey */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 50px; /* Adjust as needed */
+     }
+
+
+
+        .dropdown-item {
+            color: #666;
+        }
+
+        .dropdown-item:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
@@ -97,13 +151,13 @@
             </div>
         </div>
     </nav>
-    <div style="background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%;">
-        <h1 style="text-align: center; color: #333; font-size: 24px; margin-bottom: 20px;">Login Resident</h1>
+    <div class="login-container">
+        <h1>Login Resident</h1>
         <form method="POST" action="">
             {% csrf_token %}
-            <input type="text" placeholder="Enter your username" name="username" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ffa07a; border-radius: 5px; font-size: 16px;">
-            <input type="password" placeholder="Enter your password" name="password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ffa07a; border-radius: 5px; font-size: 16px;">
-            <input type="submit" value="Login" style="background-color: #ffa07a; color: #ffffff; padding: 12px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px;">
+            <input type="text" placeholder="Enter your username" name="username">
+            <input type="password" placeholder="Enter your password" name="password">
+            <input type="submit" value="Login">
         </form>
     </div>
 </body>
