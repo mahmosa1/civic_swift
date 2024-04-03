@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
+from .models import Room, Message
 
 # Register your models here.
+admin.site.register(Room)
+admin.site.register(Message)
+
 def delete_selected_users(modeladmin, request, queryset):
     for user in queryset:
         user.delete()
