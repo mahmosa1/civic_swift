@@ -21,21 +21,21 @@
         }
 
         .navbar {
-            background-color: #555; /* Custom navbar color */
+            background-color: #ccc; /* Custom navbar color */
             width: 100%;
         }
 
         .navbar-brand {
-            color: #fff;
+            color: #ccc;
             font-weight: bold;
         }
 
         .navbar-toggler-icon {
-            background-color: #fff;
+            background-color: #666;
         }
 
         .nav-link {
-            color: #fff;
+            color: #666;
             font-weight: bold;
         }
 
@@ -55,7 +55,7 @@
             border: 1px solid #fff;
             margin-right: 10px;
             background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            color: #ccc;
         }
 
         .search-form button {
@@ -72,49 +72,6 @@
             transform: translateY(-2px);
         }
 
-        .login-container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            margin-top: 50px; /* Adjust as needed */
-        }
-
-        .login-container h1 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .login-container form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ffa07a;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .login-container {
-    background-color: #cccccc; /* Change to grey */
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    margin-top: 50px; /* Adjust as needed */
-     }
-
-
 
         .dropdown-item {
             color: #666;
@@ -129,7 +86,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'homepage' %}">Civic Swift</a>
+            <a class="navbar-brand" >Civic Swift</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,3 +110,64 @@
             </div>
         </div>
     </nav>
+     <h1 style="color: Gray	"> Hello Mr/s.{{request.user.username}}..! </h1>
+<div>
+
+</div>
+<div>
+</div>
+
+</body>
+<style>
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+</head>
+</html>
+<body>
+    <div class="container">
+        <h2>Chat</h2>
+        <form id="post-form" method="POST" action="{% url 'checkview' %}">
+            {% csrf_token %}
+            <label for="room_name">Room Name:</label>
+            <input type="text" name="room_name" id="room_name" />
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" />
+            <input type="submit" value="Enter Room">
+        </form>
+    </div>
+</body>
