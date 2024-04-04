@@ -15,9 +15,4 @@ urlpatterns = [
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),
     path('admin/', EmployeeM, name='Admin'),
     path('Volunteer/', Volunteer, name='Volunteer'),
-    path('aa/', views.home, name='home'),
-    path('<str:room>/', views.room, name='room'),
-    path('checkview', views.checkview, name='checkview'),
-    path('send', views.send, name='send'),
-    path('getMessages/<str:room>/', views.getMessages, name='getMessages'),
-]
+    }
