@@ -1,15 +1,15 @@
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from .forms import *
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render ,redirect
+from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import Group
-from .models import Room, Message
 from .decorators import *
-from .models import Employee, Resident
+from .models import *
 # Create your views here.
 
 
@@ -106,8 +106,6 @@ def search(request):
 
     return HttpResponse(f"No results found for '{query}'.")
 
-def Volunteer(request):
-    return render(request, 'Volunteer.html')
 
 def delete_user(request, user_id):
     try:
@@ -118,11 +116,24 @@ def delete_user(request, user_id):
         # Handle the case where the user doesn't exist
         return redirect('homepage')
 
-@admin_limit
-def Admin(request):
-    return render(request, 'Admin.html')
 
-@login_required
-def Volunteer(request):
-    return render(request, 'Volunteer.html')
+class CreatPost(CreateView):
+    model = Post
+    fields = ['caption']
+    template_name = "new_post.html"
+    success_url = '/Volunteer/'
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.user = user
+        return super().form_valid(form)
+
+
+
+class Volunteer(ListView):
+    model = Post
+    template_name = "Volunteer.html"
+    paginate_by = 10000
+
+    def get_queryset(self):
+        return  Post.objects.all().order_by('-date_created')

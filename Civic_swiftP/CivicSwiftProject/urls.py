@@ -1,7 +1,7 @@
 """
 URL configuration for CivicSwiftProject project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+The urlpatterns list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
 Examples:
 Function views
@@ -16,8 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('core.urls'))
+    path('',include('core.urls')),
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='reset_password.html'), name="reset_password"),
+
+    path('reset_password_sent/' , auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
+
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 ]
