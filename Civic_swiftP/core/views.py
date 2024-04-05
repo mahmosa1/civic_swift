@@ -11,7 +11,9 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import Group
 from .decorators import *
 from .models import *
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -22,6 +24,13 @@ class SignupEmployee(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        #send_mail(
+            #'Welcome to CivicSwift!',
+            #'Thank you for signing up.',
+            #settings.EMAIL_HOST_USER,
+            #[User.email],
+            #fail_silently=False,
+        #)
         Employee_group = Group.objects.get(name='Employee')
         Employee_group.user_set.add(user)
         return redirect('homepage')
@@ -35,6 +44,13 @@ class SignupResident(CreateView):
 
     def form_valid(self, form):
          user = form.save()
+         #send_mail(
+             #'Welcome to CivicSwift!',
+             #'Thank you for signing up.',
+            #settings.EMAIL_HOST_USER,
+             #[User.email],
+             #fail_silently=False,
+         #)
          Resident_group = Group.objects.get(name='Resident')
          Resident_group.user_set.add(user)
          return redirect('homepage')
