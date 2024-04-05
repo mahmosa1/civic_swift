@@ -1,20 +1,23 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 from datetime import datetime
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     # Add more fields as needed for Employee profile
 
-    def _str_(self):
+    def __str__(self):
         return self.user.username
 
 
 class Resident(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     # Add more fields as needed for Resident profile
 
-    def _str_(self):
+    def __str__(self):
         return self.user.username
 
 class Post(models.Model):
@@ -24,3 +27,21 @@ class Post(models.Model):
 
     def _str_(self):
         return self.caption
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    recipient = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="messages")
+    name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    subject = models.CharField(max_length=200, null=True, blank=True)
+    body = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.subject
+
+    class Meta:
+        ordering = ['is_read', '-created']
+

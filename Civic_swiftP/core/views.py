@@ -2,14 +2,16 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from .forms import *
+from django.contrib import messages
 from django.shortcuts import render ,redirect
 from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import Group
 from .decorators import *
 from .models import *
+from django.contrib import messages
 # Create your views here.
 
 
@@ -84,7 +86,7 @@ def EmployeeM(request):
 @login_required
 @Resident_limit
 def ResidentM(request):
-    return render(request,'ResidentM.html')
+    return render(request, 'ResidentM.html')
 
 def search(request):
     query = request.GET.get('query', '').strip().lower()
@@ -137,3 +139,35 @@ class Volunteer(ListView):
 
     def get_queryset(self):
         return  Post.objects.all().order_by('-date_created')
+
+@login_required
+def inbox(request):
+    user = request.user
+    messages = Message.objects.filter(recipient=user).order_by('-created')
+    context = {'messages': messages}
+    return render(request, 'inbox.html', context)
+
+
+class CreateMessage(CreateView):
+    model = Message
+    form_class = MessageForm
+    template_name = 'message_form.html'
+    success_url = reverse_lazy('ResidentM')
+
+    def form_valid(self, form):
+        form.instance.sender = self.request.user
+
+        # Get the Employee user
+        employee_user = User.objects.filter(groups__name='Employee').first()
+        if employee_user:
+            form.instance.recipient = employee_user
+
+        # Save the message
+        form.save()
+
+        messages.success(self.request, 'Your message was successfully sent!')
+        return super().form_valid(form)
+
+def createMessage(request):
+    create_message_view = CreateMessage.as_view()
+    return create_message_view(request)

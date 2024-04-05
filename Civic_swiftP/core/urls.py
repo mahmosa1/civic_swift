@@ -16,5 +16,8 @@ urlpatterns = [
     path('admin/', EmployeeM, name='Admin'),
     path('Volunteer/', Volunteer.as_view(), name='Volunteer'),
     path('new-post/',CreatPost.as_view(),name='new-post'),
+    path('inbox/', views.inbox, name="inbox"),
+    path('send-message/', views.createMessage, name='create-message'),
+
 
 ]
