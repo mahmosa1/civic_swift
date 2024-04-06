@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            background-image: url('https://t4.ftcdn.net/jpg/00/91/32/87/360_F_91328725_zdst7zcQcytqXIAg8PfxAREVrPbaSenH.jpg');
+            background-image: url('https://wallpapercave.com/wp/wp3349345.jpg');
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -21,21 +21,21 @@
         }
 
         .navbar {
-            background-color: #ccc; /* Custom navbar color */
+            background-color: #343a40; /* Dark navbar color */
             width: 100%;
         }
 
         .navbar-brand {
-            color: #ccc;
+            color: #fff;
             font-weight: bold;
         }
 
         .navbar-toggler-icon {
-            background-color: #666;
+            background-color: #fff;
         }
 
         .nav-link {
-            color: #666;
+            color: #fff;
             font-weight: bold;
         }
 
@@ -43,54 +43,15 @@
             color: #ccc;
         }
 
-        .search-form {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .search-form input[type="search"] {
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #fff;
-            margin-right: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ccc;
-        }
-
-        .search-form button {
-            background-color: #4cdac2;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .search-form button:hover {
-            background-color: #36b8a4;
-            transform: translateY(-2px);
-        }
-
-
-        .dropdown-item {
-            color: #666;
-        }
-
-        .dropdown-item:hover {
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
         .container {
             width: 50%;
-            margin: 0 auto;
+            margin: 20px auto;
             text-align: center;
         }
 
         input[type=text], select {
             width: 100%;
-            padding: 12px 20px;
+            padding: 12px;
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
@@ -100,24 +61,51 @@
 
         input[type=submit] {
             width: 100%;
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
-            padding: 14px 20px;
+            padding: 14px;
             margin: 8px 0;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         input[type=submit]:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
 
-        div {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
+        h1 {
+            color: #343a40; /* Dark grey color */
+            margin-top: 40px;
+            font-size: 32px;
         }
+
+        .post-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .post-container h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .post-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
     </style>
 </head>
 <body>
@@ -137,14 +125,15 @@
             </div>
         </div>
     </nav>
-    <h1 style="color: Gray"> Hello Mr/s.{{request.user.username}}..! </h1>
-</body>
-<body>
-
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="Add">
-</form>
+    <div class="container">
+        <div class="post-container">
+            <h2>New Post</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <textarea id="post_caption" name="caption" rows="4" placeholder="Write your post caption here..." required></textarea><br><br>
+                <input type="submit" value="Add" style="background-color: #6c757d; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; transition: background-color 0.3s ease;">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -139,7 +139,7 @@ class CreatPost(CreateView):
     model = Post
     fields = ['caption']
     template_name = "new_post.html"
-    success_url = '/Volunteer/'
+    success_url = '/EmployeeM/'
 
     def form_valid(self, form):
         user = self.request.user
@@ -187,3 +187,28 @@ class CreateMessage(CreateView):
 def createMessage(request):
     create_message_view = CreateMessage.as_view()
     return create_message_view(request)
+
+
+class CreateProblemReport(CreateView):
+    model = ResidentMessage
+    form_class = ReportProblemForm
+    template_name = 'report_problem_form.html'
+    success_url = reverse_lazy('ResidentM')
+
+    def form_valid(self, form):
+        form.instance.resident = self.request.user
+
+        # Save the problem report
+        form.save()
+
+        messages.success(self.request, 'Your problem report was successfully submitted!')
+        return super().form_valid(form)
+
+def view_problem_reports(request):
+
+    # Retrieve all problem reports
+    problem_reports = ResidentMessage.objects.all()
+
+    context = {
+        'problem_reports': problem_reports}
+    return render(request, 'problem_reports.html', context)

@@ -45,3 +45,12 @@ class Message(models.Model):
     class Meta:
         ordering = ['is_read', '-created']
 
+class ResidentMessage(models.Model):
+    resident = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.subject
+

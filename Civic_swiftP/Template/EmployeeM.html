@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            background-image: url('https://t4.ftcdn.net/jpg/00/91/32/87/360_F_91328725_zdst7zcQcytqXIAg8PfxAREVrPbaSenH.jpg');
+            background-image: url('https://wallpapercave.com/wp/wp3349345.jpg');
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -21,28 +21,27 @@
         }
 
         .navbar {
-            background-color: #ccc; /* Custom navbar color */
+            background-color: #555; /* Custom navbar color */
             width: 100%;
         }
 
         .navbar-brand {
-            color: #ccc;
+            color: #fff;
             font-weight: bold;
         }
 
         .navbar-toggler-icon {
-            background-color: #666;
+            background-color: #ccc;
         }
 
         .nav-link {
-            color: #666;
+            color: #fff;
             font-weight: bold;
         }
 
         .nav-link:hover {
             color: #ccc;
         }
-
         .search-form {
             display: flex;
             align-items: center;
@@ -59,7 +58,7 @@
         }
 
         .search-form button {
-            background-color: #4cdac2;
+            background-color: #cccccc;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -68,18 +67,16 @@
         }
 
         .search-form button:hover {
-            background-color: #36b8a4;
+            background-color: #cccccc;
             transform: translateY(-2px);
         }
 
-
-        .dropdown-item {
-            color: #666;
-        }
-
-        .dropdown-item:hover {
-            color: #333;
-            background-color: #f8f9fa;
+        /* Custom style for the greeting message */
+        .greeting {
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -94,21 +91,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'EmployeeM' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'EmployeeM' %}" >Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log out</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'logout' %}" >Log out</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'new-post' %}">Add Post</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'new-post' %}" >Add Post</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'inbox' %}">Inbox</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'inbox' %}" >Inbox</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Volunteer' %}">Volunteer Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'problem_reports' %}">Problem Reports</a>
+                    </li>
+                    </ul>
                 </ul>
-                <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'Volunteer' %}">Volunteer page</a>
-                    </li>
                 <form class="search-form" role="search" method="get" action="{% url 'search' %}">
                       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
                       <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -116,52 +117,7 @@
             </div>
         </div>
     </nav>
-     <h1 style="color: Gray	"> Hello Mr/s.{{request.user.username}}..! </h1>
-<div>
-
-</div>
-<div>
-</div>
-
+    <!-- Greeting message -->
+    <h1 class="greeting">Hello Mr/s.{{ request.user.username }}..!</h1>
 </body>
-<style>
-        .container {
-            width: 50%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        input[type=text], select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type=submit] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
-
-        div {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-    </style>
-</head>
-
 </html>

@@ -16,4 +16,5 @@ admin.site.add_action(delete_selected_users)
 admin.site.unregister(User)  # Unregister the User model first if it's already registered by default
 admin.site.register(User)
 admin.site.register(Post)
+admin.site.register(ResidentMessage)
 admin.site.register(Message)

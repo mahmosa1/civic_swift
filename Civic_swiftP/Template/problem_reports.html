@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Reports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/005/592/190/non_2x/illustration-flat-linear-style-problem-solving-concept-idea-bulb-between-question-marks-on-gray-background-free-vector.jpg');
+            background-size: cover;
+        }
+        .report-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+        }
+        .report-card h4 {
+            color: #007bff;
+        }
+        .report-card p {
+            margin-bottom: 0;
+        }
+        .report-card hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        .back-btn {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Problem Reports</h1>
+        <a href="{% url 'EmployeeM' %}" class="btn btn-primary back-btn">Back</a>
+        <div class="row">
+            {% for report in problem_reports %}
+            <div class="col-lg-6">
+                <div class="report-card">
+                    <h4>{{ report.subject }}</h4>
+                    <p><strong>Resident:</strong> {{ report.resident }}</p>
+                    <p><strong>Submitted At:</strong> {{ report.timestamp }}</p>
+                    <hr>
+                    <p>{{ report.message }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

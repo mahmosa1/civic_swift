@@ -18,6 +18,8 @@ urlpatterns = [
     path('new-post/',CreatPost.as_view(),name='new-post'),
     path('inbox/', views.inbox, name="inbox"),
     path('send-message/', views.createMessage, name='create-message'),
+    path('report-problem/', CreateProblemReport.as_view(), name='report_problem'),
+    path('problem-reports/', view_problem_reports, name='problem_reports'),
 
 
 ]

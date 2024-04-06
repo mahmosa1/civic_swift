@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.urls import path
-from.models import Message
+from.models import Message, ResidentMessage
 from django.forms import ModelForm
 from django import forms
 
@@ -28,5 +28,12 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = ['name', 'email', 'subject', 'body']
+
+
+
+class ReportProblemForm(forms.ModelForm):
+    class Meta:
+        model = ResidentMessage
+        fields = ['subject', 'message']
 
 
