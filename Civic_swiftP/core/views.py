@@ -36,24 +36,42 @@ class SignupEmployee(CreateView):
         return redirect('homepage')
 
 
-class SignupResident(CreateView):
-    model = User
-    form_class = SignupResident
-    template_name = 'signupresident.html'
+class SignupResident(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.save()
 
-    def form_valid(self, form):
-         user = form.save()
-         #send_mail(
-             #'Welcome to CivicSwift!',
-             #'Thank you for signing up.',
-            #settings.EMAIL_HOST_USER,
-             #[User.email],
-             #fail_silently=False,
-         #)
-         Resident_group = Group.objects.get(name='Resident')
-         Resident_group.user_set.add(user)
-         return redirect('homepage')
+        # Create a Resident object for the user
+        resident = Resident.objects.create(user=user)
+        # Commenting out email sending for now
+        # send_mail(
+        #     'Welcome to CivicSwift!',
+        #     'Thank you for signing up.',
+        #     settings.EMAIL_HOST_USER,
+        #     [user.email],
+        #     fail_silently=False,
+        #)
+
+        # Add the user to the "Resident" group
+        resident_group = Group.objects.get(name='Resident')
+        resident_group.user_set.add(user)
+
+        return user
+
+def signup_resident(request):
+    if request.method == 'POST':
+        form = SignupResident(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to a success page or homepage
+            return redirect('homepage')
+    else:
+        form = SignupResident()
+    return render(request, 'signupresident.html', {'form': form})
 
 
 def login_Employeepage(request):
@@ -97,12 +115,35 @@ def homepage(request):
 @login_required
 @Employee_limit
 def EmployeeM(request):
-    return render(request,'EmployeeM.html')
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Get the selected resident ID from the form data
+            resident = form.cleaned_data['resident']
+            file = form.cleaned_data['file']
+
+            try:
+                # Create and save the UploadedFile instance
+                uploaded_file = UploadedFile(resident=resident, file=file)
+                uploaded_file.save()
+
+                return redirect('EmployeeM')
+            except User.DoesNotExist:
+                # Handle the case where resident with given ID does not exist
+                return HttpResponse("Selected resident does not exist.")
+    else:
+        form = UploadFileForm()
+
+    residents = User.objects.filter(groups__name='Residents')  # Filter residents based on group
+    return render(request, 'employeeM.html', {'form': form, 'residents': residents})
 
 @login_required
 @Resident_limit
 def ResidentM(request):
-    return render(request, 'ResidentM.html')
+    # Filter uploaded files based on the logged-in resident
+    uploaded_files = UploadedFile.objects.filter(resident=request.user)
+    return render(request, 'ResidentM.html', {'uploaded_files': uploaded_files})
+
 
 def search(request):
     query = request.GET.get('query', '').strip().lower()
@@ -212,3 +253,29 @@ def view_problem_reports(request):
     context = {
         'problem_reports': problem_reports}
     return render(request, 'problem_reports.html', context)
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            resident_id = form.cleaned_data['resident']
+            file = form.cleaned_data['file']
+
+            try:
+                # Retrieve the Resident instance
+                resident = User.objects.get(id=resident_id)
+
+                # Create and save the UploadedFile instance
+                uploaded_file = UploadedFile(resident=resident, file=file)
+                uploaded_file.save()
+
+                return redirect('EmployeeM')
+            except User.DoesNotExist:
+                # Handle the case where resident with given ID does not exist
+                return HttpResponse("Selected resident does not exist.")
+    else:
+        form = UploadFileForm()
+
+    residents = User.objects.filter(groups__name='Residents')  # Filter residents based on group
+    return render(request, 'employeeM.html', {'form': form, 'residents': residents})

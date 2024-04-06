@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.urls import path
-from.models import Message, ResidentMessage
+from.models import Message, ResidentMessage, UploadedFile, Resident
 from django.forms import ModelForm
 from django import forms
 
@@ -36,4 +36,7 @@ class ReportProblemForm(forms.ModelForm):
         model = ResidentMessage
         fields = ['subject', 'message']
 
-
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = UploadedFile
+        fields = ['resident', 'file']

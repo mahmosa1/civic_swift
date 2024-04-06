@@ -3,7 +3,7 @@ from django.urls import path , include
 from .views import *
 from . import views
 urlpatterns = [
-    path('signupresident/', SignupResident.as_view(),name='signupresident'),
+    path('signup_resident/', views.signup_resident, name='signup_resident'),
     path('signupEmployee/', SignupEmployee.as_view(),name='signupEmployee'),
     path('logout/',logout_user,name='logout'),
     path('loginEmployee/',login_Employeepage,name='loginEmployee'),
@@ -11,7 +11,7 @@ urlpatterns = [
     path('',homepage,name='homepage'),
     path('search',views.search,name='search'),
     path('EmployeeM/', EmployeeM, name='EmployeeM'),
-    path('ResidentM/', ResidentM, name='ResidentM'),
+    path('ResidentM/', views.ResidentM, name='ResidentM'),
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),
     path('admin/', EmployeeM, name='Admin'),
     path('Volunteer/', Volunteer.as_view(), name='Volunteer'),
@@ -20,6 +20,7 @@ urlpatterns = [
     path('send-message/', views.createMessage, name='create-message'),
     path('report-problem/', CreateProblemReport.as_view(), name='report_problem'),
     path('problem-reports/', view_problem_reports, name='problem_reports'),
+    path('upload/', views.upload_file, name='upload_file'),
 
 
 ]

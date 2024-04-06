@@ -54,3 +54,8 @@ class ResidentMessage(models.Model):
     def __str__(self):
         return self.subject
 
+
+class UploadedFile(models.Model):
+    resident = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='uploaded_files/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
