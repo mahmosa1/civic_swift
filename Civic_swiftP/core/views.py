@@ -16,6 +16,10 @@ from django.contrib import messages
 from django.core.mail import send_mail
 # Create your views here.
 
+def admin_login(request):
+    # Your view logic here
+    return render(request, 'admin/login.html')
+
 
 class SignupEmployee(CreateView):
     model = User

@@ -21,6 +21,7 @@ urlpatterns = [
     path('report-problem/', CreateProblemReport.as_view(), name='report_problem'),
     path('problem-reports/', view_problem_reports, name='problem_reports'),
     path('upload/', views.upload_file, name='upload_file'),
+    path('admin/login/', admin_login, name='admin_login'),
 
 
 ]
